@@ -35,4 +35,6 @@ appjail cmd jexec jellyfin ifconfig sb_jellyfin inet | grep inet
         inet 192.168.1.103 netmask 0xffffff00 broadcast 192.168.1.255
 ```
 
+So you can enter in your browser `http://192.168.1.103:8096` and configure Jellyfin.
+
 \~ DtxdF
