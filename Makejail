@@ -1,0 +1,29 @@
+ARG ext_if=jext
+ARG macaddr=58-9c-fc-00-00-02
+
+# General
+OPTION start
+OPTION overwrite=force
+# Network
+OPTION bridge=iface:${ext_if} jellyfin
+OPTION dhcp=sb_jellyfin
+OPTION macaddr=sb_jellyfin:${macaddr}
+# Template
+OPTION template=jellyfin.conf
+# Devices
+OPTION device=include \$devfsrules_hide_all
+OPTION device=include \$devfsrules_unhide_basic
+OPTION device=include \$devfsrules_unhide_login
+# Devices: DHCP
+OPTION device=path 'bpf*' unhide
+# Devices: 3D support
+OPTION device=path 'dri' unhide
+OPTION device=path 'dri/*' unhide
+OPTION device=path 'drm' unhide
+OPTION device=path 'drm/*' unhide
+OPTION device=path 'pci' unhide
+
+PKG jellyfin
+
+SYSRC jellyfin_enable=YES
+SERVICE jellyfin start
