@@ -28,6 +28,20 @@ appjail makejail \
         --macaddr 58-9c-fc-00-00-01
 ```
 
+If you want to mount an external directory outsite the jail:
+
+```sh
+mkdir media
+appjail makejail \
+    -j jellyfin \
+    -f gh+DtxdF/jellyfin-makejail \
+    -o fstab="$PWD/media /media"
+# Fix permissions.
+appjail cmd jexec jellyfin chown jellyfin:jellyfin /media
+```
+
+You just need to specify `/media` in Jellyfin web interface.
+
 Use `appjail cmd jexec jellyfin ifconfig` to get the IP address:
 
 ```sh
